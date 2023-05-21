@@ -54,3 +54,9 @@ function toggleAudioTabs() {
 chrome.action.onClicked.addListener(function () {
     toggleAudioTabs();
 });
+
+chrome.commands.onCommand.addListener(function (command) {
+    if (command === 'toggle-audio-tabs') {
+        toggleAudioTabs();
+    }
+});
