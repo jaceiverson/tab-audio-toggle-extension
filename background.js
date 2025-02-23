@@ -51,12 +51,30 @@ function toggleAudioTabs() {
     });
 }
 
+// Function to execute the next function after the delay
+function executeNextFunctionWithDelay(nextFunction) {
+    // Delay in milliseconds
+    let delayInMilliseconds = 1000; // 1 second
+    setTimeout(nextFunction, delayInMilliseconds);
+}
+
+// Function to press the F key
+function pressF() {
+    chrome.automation.keyDown({ keyCode: 'KeyF' }, function () {
+        chrome.automation.keyUp({ keyCode: 'KeyF' });
+    });
+}
+
+// listener for when the extension icon is clicked
 chrome.action.onClicked.addListener(function () {
     toggleAudioTabs();
 });
 
+// listener for when the keyboard shortcut is pressed
 chrome.commands.onCommand.addListener(function (command) {
     if (command === 'toggle-audio-tabs') {
         toggleAudioTabs();
     }
+    executeNextFunctionWithDelay(pressF);
+
 });
